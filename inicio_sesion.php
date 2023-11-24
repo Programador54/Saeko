@@ -58,7 +58,7 @@ $conn->close();
 
 <body class="backcolor">
 
-    <div class="titulo"><li> iBienvenido Registrate!    </li></div>   
+    <div class="titulo"><li> iBienvenido Inicia Sesion!    </li></div>   
     <div id="sesion">
     <div class="container">
     
