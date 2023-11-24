@@ -1,0 +1,84 @@
+#sesion {
+  background-color: rgb(216, 255, 223);
+  border: 1px solid;
+  border-radius: 10px;
+  box-shadow: 0 5px 100px rgba(0, 0, 0, 0.2), 5px 0px 10px rgba(0, 0, 0, 0.2); /* Creates a diagonal shadow */
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 20px;
+  position: relative;
+  top: 40vh;
+  transform: translateY(-50%);
+  width: 50%;
+  opacity: 0.8;
+}
+
+
+#sesion h2 {
+  color: #2196F3;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+  top: 0px;
+}
+#sesion h3 {
+  color: rgb(243, 33, 208);
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+  
+  top: 0px;
+}
+#sesion ul {
+  list-style: none;
+  padding: 0;
+}
+
+#sesion li {
+  margin-bottom: 10px;
+  list-style: none;
+}
+
+#sesion input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  padding: 10px;
+  width: 100%;
+}
+
+#sesion button {
+  background-color: #2196F3;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px;
+  width: 100%;
+}
+
+#sesion a {
+  color: #2196F3;
+  text-decoration: none;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+.titulo{
+  font-size: 80px;
+  list-style: none;
+  text-align: center;
+}
+.backcolor{
+  background-color: #0c528b;
+  background-image: url("candado.png");
+  background-size: 1200px 1200px;
+  background-repeat: no-repeat;
+  background-position-x: 410px;
+}
