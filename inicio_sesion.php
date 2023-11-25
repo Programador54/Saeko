@@ -13,7 +13,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $correo = $_POST['correo'];
 
     // Validación de datos del formulario
-    // ...
 
     $query = "SELECT * FROM usuarios WHERE username=?";
     $statement = $conn->prepare($query);
