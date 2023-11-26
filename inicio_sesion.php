@@ -7,21 +7,23 @@ if ($conn->connect_error) {
 }
 //get data form
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-    //get the hash
-    $sql = "SELECT password FROM usuarios WHERE username = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $stmt->bind_result($hash);
-    $stmt->fetch();
-    
-    //check if the user and password are corrects
-    if (password_verify($password, $hash)) {
-        $_SESSION["username"] = $username;
-        header("Location: index.php");
-        exit();
+    $username = $_POST['username'];
+    $apellido = $_POST['apellido'];
+    $password = $_POST['password'];
+    $matricula = $_POST['matricula'];
+    $correo = $_POST['correo'];
+
+    // Validación de datos del formulario
+    // ...
+
+    $query = "SELECT * FROM usuarios WHERE username=?";
+    $statement = $conn->prepare($query);
+    $statement->bind_param("s", $username);
+    $statement->execute();
+    $result = $statement->get_result();
+
+    if ($result->num_rows > 0) {
+        echo "El usuario ya existe";
     } else {
         echo "Usuario o contraseña incorrectos";
     }
