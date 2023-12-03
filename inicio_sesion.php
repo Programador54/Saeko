@@ -34,59 +34,25 @@ $conn->close();
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de sesión</title>
-    <style>
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .form {
-            border: 2px solid #ccc;
-            border-radius: 10px;
-            padding: 30px;
-            width: 30%;
-            text-align: center;
-            background-color: #DF3713;
-        }
-
-        input {
-            margin-bottom: 10px;
-            padding: 5px;
-            width: 75%;
-            border-radius: 10px;
-
-        }
-
-        button {
-            width: 85%;
-            padding: 10px;
-            border-radius: 10px;
-        }
-
-        h2 {
-            align-items: justify;
-            padding: 5px;
-            text-decoration: underline;
-
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Inicio de sesión</title>
 </head>
 
-<body>
-    <div class="form">
-        <h1>Ingresa tus datos:</h1><br>
-        <form action="inicio_sesion.php" method="POST">
-            <input type="text" name="username" placeholder="Usuario" required>
-            <input type="password" name="password" placeholder="Contraseña" required>
-            <button type="submit">Iniciar sesión</button><br>
-        </form>
+<body class="backcolor">
+<div id="sesion"> 
+<div class="container">
+    <div class="titulo">Ingresa tus datos:<br>
+      <form action="inicio_sesion.php" method="POST">
+        <input type="text" name="username" placeholder="Usuario" required class="input">
+        <input type="password" name="password" placeholder="Contraseña" required class="input">
+        <button type="submit" class="button">Iniciar sesión</button><br>
+      </form>
     </div>
+</div>
+  </div>
+
 </body>
 
 </html>
