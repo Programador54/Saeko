@@ -59,3 +59,15 @@ $resultado_alumnos_calificaciones = $conexion->query($consulta_alumnos_calificac
 // Cerrar la conexión después de utilizarla
 $conexion->close();
 ?>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Inicio de sesión</title>
+</head>
+<body class="backcolor2"></body>
+</html>
+

@@ -1,29 +1,29 @@
 <?php
+//file that contains db connection
 require "db/conexion.php";
-
+session_start();
 if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
-
+//get data form
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $username = $_POST['username'];
-    $apellido = $_POST['apellido'];
-    $password = $_POST['password'];
-    $matricula = $_POST['matricula'];
-    $correo = $_POST['correo'];
-
-    // Validación de datos del formulario
-    // ...
-
-    $query = "SELECT * FROM usuarios WHERE username=?";
-    $statement = $conn->prepare($query);
-    $statement->bind_param("s", $username);
-    $statement->execute();
-    $result = $statement->get_result();
-
-    if ($result->num_rows > 0) {
-        echo "El usuario ya existe";
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+    //get the hash
+    $sql = "SELECT password FROM usuarios WHERE username = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $stmt->bind_result($hash);
+    $stmt->fetch();
+    
+    //check if the user and password are corrects
+    if (password_verify($password, $hash)) {
+        $_SESSION["username"] = $username;
+        header("Location: index.php");
+        exit();
     } else {
+<<<<<<< HEAD
         // security: use a secure hashing algorithm
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
@@ -38,25 +38,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         } else {
             echo "Error al registrar: " . $insertStatement->error;
         }
+=======
+        echo "Usuario o contraseña incorrectos";
+>>>>>>> a5f71f4b37bd241d9bca55d51e8be23f8e6c6a67
     }
+    $stmt->close();
 }
-
 $conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de usuarios</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Inicio de sesión</title>
 </head>
 
 <body class="backcolor">
+<<<<<<< HEAD
 
     <div class="titulo"><li> iBienvenido Inicia Sesion!    </li></div>   
     <div id="sesion">
@@ -73,6 +75,19 @@ $conn->close();
     </div>
     </div>
 
+=======
+<div id="sesion"> 
+<div class="container">
+    <div class="titulo">Ingresa tus datos:<br>
+      <form action="inicio_sesion.php" method="POST">
+        <input type="text" name="username" placeholder="Usuario" required class="input">
+        <input type="password" name="password" placeholder="Contraseña" required class="input">
+        <button type="submit" class="button">Iniciar sesión</button><br>
+      </form>
+    </div>
+</div>
+  </div>
+>>>>>>> a5f71f4b37bd241d9bca55d51e8be23f8e6c6a67
 
 </body>
 
