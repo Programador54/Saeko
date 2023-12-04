@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         if ($insertStatement->execute()) {
             echo "Usuario registrado correctamente";
-            header("location: inicio_sesion.php");
+            header("location: .php");
             exit();
         } else {
             echo "Error al registrar: " . $insertStatement->error;
@@ -62,14 +62,13 @@ $conn->close();
     <div id="sesion">
     <div class="container">
     
-        <form action="registro.php" method="POST">
-            <li><input type="text" name="username" placeholder="Usuario" required></li>
-            <li><input type="text" name="apellido" placeholder="Apellido" required></li>
+        <form action="iniciar_sesion.php" method="POST">
+            <li><input type="text" name="username" placeholder="Nombre completo" required></li>
             <li><input type="password" name="password" placeholder="Contraseña" required></li>
             <li><input type="number" name="matricula" placeholder="Matricula" maxlength="18" required></li>
             <li><input type="text" name="correo" placeholder="Correo" required></li>
-            <li><button type="submit">Registrarse</button><br></li>
-            <h2>¿Ya tienes una cuenta?</h2> <h3><a href="inicio_sesion.php">Inicia sesión</a></h3>
+            <li><button type="submit">Iniciar sesion</button><br></li>
+            <h2>¿No tienes una cuenta?</h2> <h3><a href="inicio_ses_prof.php">¿Eres Maestro?</a></h3> <h3><a href="registro.php">Registrate</a></h3> 
       </form>
     </div>
     </div>
