@@ -1,46 +1,38 @@
 <?php
-//file that contains db connection
+// Archivo que contiene la conexión a la base de datos
 require "db/conexion.php";
 session_start();
+
+// Verificar la conexión
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-//get data form
+
+// Verificar si se envió el formulario
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
-    //get the hash
+
+    // Consultar la contraseña de la base de datos
     $sql = "SELECT password FROM usuarios WHERE username = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $username);
     $stmt->execute();
-    $stmt->bind_result($hash);
+    $stmt->bind_result($savedPassword);
     $stmt->fetch();
+    $stmt->close();
 
-    //check if the user and password are corrects
-    if (password_verify($password, $hash)) {
+    // Verificar si la contraseña es correcta
+    if ($password == $savedPassword) {
         $_SESSION["username"] = $username;
-        header("Location: index.php");
+        header("Location: interfaz_alum.php");
         exit();
     } else {
-        // security: use a secure hashing algorithm
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-        $insertQuery = "INSERT INTO usuarios (username, apellido, password, matricula, correo) VALUES (?, ?, ?, ?, ?)";
-        $insertStatement = $conn->prepare($insertQuery);
-        $insertStatement->bind_param("sssss", $username, $apellido, $hashedPassword, $matricula, $correo);
-
-        if ($insertStatement->execute()) {
-            echo "Usuario registrado correctamente";
-            header("location: .php");
-            exit();
-        } else {
-            echo "Error al registrar: " . $insertStatement->error;
-        }
-        echo "Usuario o contraseña incorrectos";
+        echo "Usuario o contraseña incorrectos";
     }
-    $stmt->close();
 }
+
+// Cerrar la conexión
 $conn->close();
 ?>
 
@@ -48,7 +40,6 @@ $conn->close();
 <html lang="es">
 
 <head>
-<<<<<<< HEAD
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de sesión</title>
@@ -56,55 +47,19 @@ $conn->close();
 </head>
 
 <body class="backcolor">
-    <div class="titulo">
-        <li> Ingresa tus datos:<br> </li>
-    </div>
-    <div id="sesion">
-        <div class="container">
-            <form action="inicio_sesion.php" method="POST">
-                <li><input type="text" name="username" placeholder="Usuario" required></li>
-                <li><input type="password" name="password" placeholder="Contraseña" required></li>
-                <li><button type="submit">Iniciar sesión</button><br></li>
-            </form>
-        </div>
-=======
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>Inicio de sesión</title>
-</head>
 
-<body class="backcolor">
-<<<<<<< HEAD
-
-    <div class="titulo"><li> iBienvenido Inicia Sesion!    </li></div>   
+    <div class="titulo"><li>¡Bienvenido! Inicia Sesión</li></div>   
     <div id="sesion">
     <div class="container">
     
-        <form action="iniciar_sesion.php" method="POST">
+        <form action="inicio_sesion.php" method="POST">
             <li><input type="text" name="username" placeholder="Nombre completo" required></li>
             <li><input type="password" name="password" placeholder="Contraseña" required></li>
-            <li><input type="number" name="matricula" placeholder="Matricula" maxlength="18" required></li>
-            <li><input type="text" name="correo" placeholder="Correo" required></li>
-            <li><button type="submit">Iniciar sesion</button><br></li>
-            <h2>¿No tienes una cuenta?</h2> <h3><a href="inicio_ses_prof.php">¿Eres Maestro?</a></h3> <h3><a href="registro.php">Registrate</a></h3> 
+            <li><button type="submit">Iniciar sesión</button><br></li>
+            <h2>¿No tienes una cuenta?</h2> <h3><a href="inicio_ses_prof.php">¿Eres Maestro?</a></h3> <h3><a href="registro.php">Regístrate</a></h3> 
       </form>
     </div>
     </div>
-
-=======
-<div id="sesion"> 
-<div class="container">
-    <div class="titulo">Ingresa tus datos:<br>
-      <form action="inicio_sesion.php" method="POST">
-        <input type="text" name="username" placeholder="Usuario" required class="input">
-        <input type="password" name="password" placeholder="Contraseña" required class="input">
-        <button type="submit" class="button">Iniciar sesión</button><br>
-      </form>
-    </div>
-</div>
-  </div>
-
 
 </body>
 

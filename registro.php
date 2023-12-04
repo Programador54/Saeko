@@ -31,9 +31,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($result->num_rows > 0) {
         echo "El usuario ya existe";
     } else {
-        // Security: use a secure hashing algorithm
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
+        //Insercion en "usuarios"
+        $insertusuarios = "INSERT INTO usuarios (username, password, matricula, correo) VALUES (?, ?, ?, ?)";
+        $insertstmtusu = $conn->prepare($insertusuarios);
+        $insertstmtusu ->bind_param("ssss", $username, $password, $matricula, $correo);
+        $insertstmtusu ->execute();
         // Inserción en la base de datos "alumnos2"
         $insertQueryUsuarios = "INSERT INTO alumnos2 (nombre, matricula, grado, correo) VALUES (?, ?, ?, ?)";
         $insertStatementUsuarios = $conn->prepare($insertQueryUsuarios);
@@ -48,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             echo "Usuario registrado correctamente";
 
             // Registra al mismo alumno con id_materia del 1 al 7
-            for ($id_materia = 1; $id_materia <= 7; $id_materia++) {
+            for ($id_materia = 1; $id_materia <= 10; $id_materia++) {
                 $insertStatementAlumnos->bind_param("ssss", $username, $matricula, $grado, $id_materia);
                 if (!$insertStatementAlumnos->execute()) {
                     echo "Error al registrar en la tabla 'alumnos': " . $insertStatementAlumnos->error;

@@ -1,5 +1,5 @@
 <?php
-include ('barra_nav.php');
+include ('layouts/barra_nav.php');
 // Conexión a la base de datos (ajusta las credenciales)
 $conn = new mysqli("localhost", "root", "", "saeko");
 
