@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Interfaz de control escolar</title>
@@ -53,11 +54,14 @@
       width: 70%;
     }
 
-    table, th, td {
+    table,
+    th,
+    td {
       border: 1px solid #ddd;
     }
 
-    th, td {
+    th,
+    td {
       padding: 10px;
       text-align: left;
     }
@@ -67,7 +71,8 @@
       padding: 20px;
       background-color: #f0f0f0;
     }
-aside h2 {
+
+    aside h2 {
       color: #333;
     }
 
@@ -94,13 +99,13 @@ aside h2 {
       background-color: #bbb;
     }
 
-    a{
-        text-decoration: none;
-        color: #f0f0f0;
+    a {
+      text-decoration: none;
+      color: #f0f0f0;
     }
-    
   </style>
 </head>
+
 <body>
   <header>
     <h1><a href="interfaz_prof.php">Interfaz de control escolar</a></h1>

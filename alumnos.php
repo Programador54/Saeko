@@ -57,4 +57,3 @@ $conn->close();
 
 echo "</body>";
 echo "</html>";
-?>
