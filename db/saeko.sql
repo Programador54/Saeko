@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-11-2023 a las 04:51:00
+-- Tiempo de generación: 04-12-2023 a las 05:37:02
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.0.25
 
@@ -33,15 +33,48 @@ CREATE TABLE `alumnos` (
   `id` int(11) NOT NULL,
   `nombre` varchar(226) NOT NULL,
   `matricula` int(18) NOT NULL,
-  `grado` varchar(226) NOT NULL
+  `grado` varchar(226) NOT NULL,
+  `id_materia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `alumnos`
 --
 
-INSERT INTO `alumnos` (`id`, `nombre`, `matricula`, `grado`) VALUES
-(1, 'Israel Lara', 2147483647, '5D');
+INSERT INTO `alumnos` (`id`, `nombre`, `matricula`, `grado`, `id_materia`) VALUES
+(1, 'Israel Lara', 2147483647, '5D', 1),
+(3, 'Edgar Flores Lira', 2147483643, '5D', 2),
+(5, 'Roberto Calzada', 2147483642, '5D', 1),
+(28, 'Martin Meza', 2147483647, '5D', 1),
+(29, 'Martin Meza', 2147483647, '5D', 2),
+(30, 'Martin Meza', 2147483647, '5D', 3),
+(31, 'Martin Meza', 2147483647, '5D', 4),
+(32, 'Martin Meza', 2147483647, '5D', 5),
+(33, 'Martin Meza', 2147483647, '5D', 6),
+(34, 'Martin Meza', 2147483647, '5D', 7);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `alumnos2`
+--
+
+CREATE TABLE `alumnos2` (
+  `id` int(11) NOT NULL,
+  `nombre` text NOT NULL,
+  `matricula` int(226) NOT NULL,
+  `grado` varchar(226) NOT NULL,
+  `correo` varchar(226) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `alumnos2`
+--
+
+INSERT INTO `alumnos2` (`id`, `nombre`, `matricula`, `grado`, `correo`) VALUES
+(1, 'Israel Lara', 2147483647, '5D', 'isra@gmail.com'),
+(2, 'Edgar Flores Lira', 2147483643, '5D', 'edgar@gmail.com'),
+(7, 'Martin Meza', 2147483647, '5D', 'a@a.com');
 
 -- --------------------------------------------------------
 
@@ -51,31 +84,62 @@ INSERT INTO `alumnos` (`id`, `nombre`, `matricula`, `grado`) VALUES
 
 CREATE TABLE `calificaciones` (
   `id` int(11) NOT NULL,
-  `alumno_id` int(11) DEFAULT NULL,
-  `materia` varchar(50) DEFAULT NULL,
+  `id_materia` int(11) DEFAULT NULL,
+  `id_alumno` varchar(50) NOT NULL,
   `calificacion` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `calificaciones`
+--
+
+INSERT INTO `calificaciones` (`id`, `id_materia`, `id_alumno`, `calificacion`) VALUES
+(28, 1, '1', 10),
+(29, 1, '5', 4),
+(30, 1, '6', 0),
+(35, 2, '3', 8);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `incidencias`
+-- Estructura de tabla para la tabla `maestros`
 --
 
-CREATE TABLE `incidencias` (
+CREATE TABLE `maestros` (
   `id` int(11) NOT NULL,
-  `alumno_id` int(11) DEFAULT NULL,
-  `tipo_incidencia` varchar(255) DEFAULT NULL,
-  `descripcion` text DEFAULT NULL,
-  `fecha_incidencia` date DEFAULT NULL
+  `nombre` varchar(50) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `contrasena` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `incidencias`
+-- Volcado de datos para la tabla `maestros`
 --
 
-INSERT INTO `incidencias` (`id`, `alumno_id`, `tipo_incidencia`, `descripcion`, `fecha_incidencia`) VALUES
-(1, 1, '', '', '0000-00-00');
+INSERT INTO `maestros` (`id`, `nombre`, `email`, `contrasena`) VALUES
+(2, 'prof1', 'a@a.com', '12');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `materias`
+--
+
+CREATE TABLE `materias` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `grado` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `materias`
+--
+
+INSERT INTO `materias` (`id`, `nombre`, `grado`) VALUES
+(1, 'Fisica', '5D'),
+(2, 'Matematicas', '5D'),
+(3, 'Historia', ''),
+(4, 'Geografia', '');
 
 -- --------------------------------------------------------
 
@@ -96,14 +160,7 @@ CREATE TABLE `trabajos` (
 --
 
 INSERT INTO `trabajos` (`id`, `titulo`, `descripcion`, `fecha_entrega`, `archivo_adjunto`) VALUES
-(1, 'Actividad 1', 'Realizar el trabajo', 2023, 'archivos_adjuntos/Actividad 1.docx'),
-(3, 'Actividad 1', 'realiza la actividad', 2023, 'archivos_adjuntos/225.pdf'),
-(4, 'Actividad 1', 'realiza la actividad', 2023, 'archivos_adjuntos/225.pdf'),
-(5, 'Actividad 1', 'realiza la actividad', 2023, 'archivos_adjuntos/225.pdf'),
-(6, 'Actividad 1', 'realiza la actividad', 2023, 'archivos_adjuntos/225.pdf'),
-(7, 'Actividad 1', 'realiza la actividad', 2023, 'archivos_adjuntos/225.pdf'),
-(8, 'Actividad 1', 'realiza la actividad', 2023, 'archivos_adjuntos/225.pdf'),
-(9, 'Actividad 1', 'realiza la actividad', 2023, 'archivos_adjuntos/225.pdf');
+(10, 'Actividad 1', 'realiza la actividad', 2023, 'archivos_adjuntos/');
 
 -- --------------------------------------------------------
 
@@ -138,18 +195,30 @@ ALTER TABLE `alumnos`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `alumnos2`
+--
+ALTER TABLE `alumnos2`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `calificaciones`
 --
 ALTER TABLE `calificaciones`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `alumno_id` (`alumno_id`);
+  ADD KEY `alumno_id` (`id_materia`);
 
 --
--- Indices de la tabla `incidencias`
+-- Indices de la tabla `maestros`
 --
-ALTER TABLE `incidencias`
+ALTER TABLE `maestros`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_alumno_incidencia` (`alumno_id`);
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indices de la tabla `materias`
+--
+ALTER TABLE `materias`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `trabajos`
@@ -171,47 +240,43 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `alumnos`
 --
 ALTER TABLE `alumnos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT de la tabla `alumnos2`
+--
+ALTER TABLE `alumnos2`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `calificaciones`
 --
 ALTER TABLE `calificaciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
--- AUTO_INCREMENT de la tabla `incidencias`
+-- AUTO_INCREMENT de la tabla `maestros`
 --
-ALTER TABLE `incidencias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `maestros`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `materias`
+--
+ALTER TABLE `materias`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `trabajos`
 --
 ALTER TABLE `trabajos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `calificaciones`
---
-ALTER TABLE `calificaciones`
-  ADD CONSTRAINT `calificaciones_ibfk_1` FOREIGN KEY (`alumno_id`) REFERENCES `alumnos` (`id`);
-
---
--- Filtros para la tabla `incidencias`
---
-ALTER TABLE `incidencias`
-  ADD CONSTRAINT `fk_alumno_incidencia` FOREIGN KEY (`alumno_id`) REFERENCES `alumnos` (`id`);
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

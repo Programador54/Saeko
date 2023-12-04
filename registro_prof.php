@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Error de conexión: " . $conexion->connect_error);
     }
 
-    $stmt = $conexion->prepare("INSERT INTO maestros (nombre, email, clave) VALUES (?, ?, ?)");
+    $stmt = $conexion->prepare("INSERT INTO maestros (nombre, email, contrasena) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $nombre, $email, $contrasena);
 
     if ($stmt->execute()) {

@@ -1,5 +1,5 @@
 <?php
-include "barra_nav.php";
+include "layouts/barra_nav.php";
 if (isset($_GET['id_materia'])) {
     $id_materia = $_GET['id_materia'];
 
