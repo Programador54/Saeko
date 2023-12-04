@@ -23,7 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         header("Location: index.php");
         exit();
     } else {
-<<<<<<< HEAD
         // security: use a secure hashing algorithm
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
@@ -38,9 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         } else {
             echo "Error al registrar: " . $insertStatement->error;
         }
-=======
         echo "Usuario o contraseña incorrectos";
->>>>>>> a5f71f4b37bd241d9bca55d51e8be23f8e6c6a67
     }
     $stmt->close();
 }
@@ -104,11 +101,10 @@ $conn->close();
         <input type="password" name="password" placeholder="Contraseña" required class="input">
         <button type="submit" class="button">Iniciar sesión</button><br>
       </form>
->>>>>>> 77cc1045b6d105f0d27e40a0edcf61fbb9621f94
     </div>
 </div>
   </div>
->>>>>>> a5f71f4b37bd241d9bca55d51e8be23f8e6c6a67
+
 
 </body>
 
