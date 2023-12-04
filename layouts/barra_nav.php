@@ -114,7 +114,6 @@
     <ul>
       <li><a href="alumnos.php">Alumnos</a></li>
       <li><a href="trabajos.php">Trabajos</a></li>
-      <li><a href="reportes.php">Reportes</a></li>
     </ul>
   </nav>
 </body>

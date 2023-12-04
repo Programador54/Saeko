@@ -3,98 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Interfaz de control escolar</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    header {
-      background-color: #4CAF50;
-      color: white;
-      text-align: center;
-      padding: 1em;
-      width: 100%;
-    }
-
-    nav {
-      background-color: #333;
-      color: white;
-      padding: 0.5em;
-      width: 100%;
-    }
-
-    nav ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: space-around;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: white;
-    }
-
-    main {
-      display: flex;
-      justify-content: space-around;
-      width: 100%;
-      padding: 20px;
-    }
-
-    table {
-      border-collapse: collapse;
-      width: 70%;
-    }
-
-    table, th, td {
-      border: 1px solid #ddd;
-    }
-
-    th, td {
-      padding: 10px;
-      text-align: left;
-    }
-
-    aside {
-      width: 20%;
-      padding: 20px;
-      background-color: #f0f0f0;
-    }
-aside h2 {
-      color: #333;
-    }
-
-    aside ul {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    aside li {
-      margin-bottom: 10px;
-    }
-
-    aside a {
-      text-decoration: none;
-      color: #333;
-      display: block;
-      padding: 10px;
-      background-color: #ddd;
-      border-radius: 5px;
-      transition: background-color 0.3s;
-    }
-
-    aside a:hover {
-      background-color: #bbb;
-    }
-    
-  </style>
+  <link rel="stylesheet" type="text/css" href="estilo_interfaz_prof.css"> 
 </head>
 <body>
   <header>
@@ -117,42 +26,51 @@ aside h2 {
       </tr>
 
       <?php
-        // Conexión a la base de datos (ajusta las credenciales)
         $conexion = new mysqli("localhost", "root", "", "saeko");
 
-        // Verificar la conexión
         if ($conexion->connect_error) {
           die("La conexión falló: " . $conexion->connect_error);
         }
 
-        // Consulta para obtener los datos de la tabla alumnos
-        $consulta = "SELECT * FROM alumnos";
-        $resultado = $conexion->query($consulta);
+        $consulta_alumnos = "SELECT * FROM alumnos2";
+        $resultado_alumnos = $conexion->query($consulta_alumnos);
 
-        // Mostrar los datos en la tabla
-        while ($fila = $resultado->fetch_assoc()) {
+        while ($fila_alumnos = $resultado_alumnos->fetch_assoc()) {
           echo "<tr>";
-          echo "<td>" . $fila['id'] . "</td>";
-          echo "<td>" . $fila['nombre'] . "</td>";
-          echo "<td>" . $fila['grado'] . "</td>";
-          echo "<td>" . $fila['matricula'] . "</td>";
+          echo "<td>" . $fila_alumnos['id'] . "</td>";
+          echo "<td>" . $fila_alumnos['nombre'] . "</td>";
+          echo "<td>" . $fila_alumnos['grado'] . "</td>";
+          echo "<td>" . $fila_alumnos['matricula'] . "</td>";
           echo "</tr>";
         }
-
-        // Cerrar la conexión
-        $conexion->close();
       ?>
-
     </table>
+
     <aside>
-      <h2>Materias</h2>
-      <ul>
-        <li>Matemáticas</li>
-        <li>Historia</li>
-        <li>Ciencias</li>
-        <!-- Agrega más materias según tus datos -->
-      </ul>
-    </aside>
+    <h2>Materias</h2>
+    <ul>
+        <?php
+        // Consulta para obtener las materias de la base de datos
+        $consulta_materias = "SELECT * FROM materias";
+        $resultado_materias = $conexion->query($consulta_materias);
+
+        // Mostrar las materias en la lista con enlaces a páginas específicas
+        while ($fila_materias = $resultado_materias->fetch_assoc()) {
+            $id_materia = $fila_materias['id'];
+            $nombre_materia = $fila_materias['nombre'];
+            $url_pagina_materia = "pagina_materia.php?id_materia=$id_materia"; // Cambia el nombre de la página según tus necesidades
+            echo "<li><a href='$url_pagina_materia'>$nombre_materia</a></li>";
+        }
+        ?>
+
+        <!-- Formulario para agregar nuevas materias -->
+        <form action="agregar_materia.php" method="post">
+            <label for="nueva_materia">Nueva Materia:</label>
+            <input type="text" id="nueva_materia" name="nueva_materia" required>
+            <button type="submit">Agregar Materia</button>
+        </form>
+    </ul>
+</aside>
   </main>
   <footer>
     <p>Copyright &copy; 2023</p>
@@ -160,3 +78,6 @@ aside h2 {
 </body>
 </html>
 
+<?php
+$conexion->close();
+?>
